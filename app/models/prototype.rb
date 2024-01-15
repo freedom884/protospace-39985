@@ -8,10 +8,4 @@ class Prototype < ApplicationRecord
   validates :catch_copy, presence: true
   validates :concept, presence: true
 
-
-
-  def create
-    @prototype = Prototype.new(prototype_params)
-    # 以下略
-  end
 end
