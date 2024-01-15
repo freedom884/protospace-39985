@@ -2,6 +2,7 @@ class PrototypesController < ApplicationController
   before_action :set_prototype, except: [:index, :new, :create]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :contributor_confirmation, only: [:edit, :update, :destroy]
+  before_action :move_to_index, only:[:edit]
 
   def index  # indexアクションを定義した
     @prototype = Prototype.includes(:user)
@@ -22,7 +23,7 @@ class PrototypesController < ApplicationController
 
   def show
     @prototype = Prototype.find(params[:id])
-    @comment = Comment.new
+    @comment = Comment.new()
     @comments = @prototype.comments.includes(:user)
 
   end
@@ -34,15 +35,15 @@ class PrototypesController < ApplicationController
   def update
     @prototype = Prototype.find(params[:id])
     if @prototype.update(prototype_params)
-      redirect_to action: :show
+      redirect_to prototype_path(@prototype.id)
   else
     render :edit, status: :unprocessable_entity
   end
   end
 
   def destroy
-    @prototype = Prototype.find(params[:id])
-    @prototype.destroy
+    prototype = Prototype.find(params[:id])
+    prototype.destroy
     redirect_to root_path, notice: 'Prototype was successfully destroyed.'
   end
 
