@@ -4,10 +4,9 @@
     <% if user_signed_in?  %>
       <%# <div class="greeting"> %>
      <div class="greeting"> 
-       <%= "こんにちは #{current_user.name} さん" %>
+       <%= "こんにちは、" %>
         <%# <%= link_to '投稿ページ', '/posts/new'%>
-        <%= link_to "投稿ページ", new_prototype_path, class: :greeting__link%> 
-      <%# </div> %>
+        <%= link_to "#{current_user.name}さん", user_path(current_user), class: :greeting__link%> 
        </div> 
       <% end %>
     <%# // ログインしているときは上記を表示する %>
