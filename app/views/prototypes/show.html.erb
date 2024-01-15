@@ -8,8 +8,8 @@
       <%# プロトタイプの投稿者とログインしているユーザーが同じであれば以下を表示する %>
       <% if user_signed_in? && current_user.id == @prototype.user_id %>
         <div class="prototype__manage">
-          <%= link_to "編集する", edit_prototype_path(@prototype), class: :prototype__btn %>
-          <%= link_to "削除する", prototype_path(@prototype), data: { turbo_method: :delete } ,class: :prototype__btn %>
+          <%= link_to "編集する", edit_prototype_path, class: :prototype__btn %>
+          <%= link_to "削除する", prototype_path, data: { turbo_method: :delete } ,class: :prototype__btn %>
         </div>
       <%# // プロトタイプの投稿者とログインしているユーザーが同じであれば上記を表示する %>
       <% end %>
@@ -46,7 +46,6 @@
           <% end %>
 
         <%# // ログインしているユーザーには上記を表示する %>
-        <% if user_signed_in? %>
         <ul class="comments_lists">
           <%# 投稿に紐づくコメントを一覧する処理を記述する %>
           <% @comments.each do |comment| %>
@@ -59,7 +58,6 @@
           <%# // 投稿に紐づくコメントを一覧する処理を記述する %>
       <% end %>
         </ul>
-        <% end %>
       </div>
     </div>
   </div>
